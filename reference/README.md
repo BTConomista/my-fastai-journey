@@ -19,7 +19,7 @@ All'inizio questa cartella conteneva due notebook caricati a mano, che servivano
 - `00_is_it_a_bird_creating_a_model_from_your_own_data.ipynb`
 - `01_intro.ipynb`
 
-Quando i repo `course22` e `fastbook` sono stati copiati per intero nel repository, quei due file sono diventati doppioni dei loro originali. Tenere due copie dello stesso notebook è una fonte di confusione: non è più ovvio quale sia la versione "buona", e le due copie possono divergere nel tempo senza che nessuno se ne accorga.
+Quando i repo `course22` e `fastbook` sono stati copiati per intero nel repository, quei due file sono diventati doppioni dei loro originali. Tenere due copie dello stesso notebook è una fonte di confusione: non è più ovvio quale sia la versione "buona", e le due copie possono divergere nel tempo senza che nessuno se ne accorga. Entrambi sono stati quindi rimossi, e restano qui solo i documenti di analisi.
 
 ### `01_intro.ipynb` — rimosso
 
@@ -34,12 +34,12 @@ Il contenuto era però lo stesso: **tutte e 22 le celle di codice erano identich
 
 La copia in `fastbook/01_intro.ipynb` è quindi **preferibile**: è l'originale canonico, e adesso i suoi path locali `images/...` funzionano davvero, perché la cartella `fastbook/images/` è presente nel repository. La copia Colab è stata rimossa e `CONFRONTO.md` ora punta a `fastbook/01_intro.ipynb`.
 
-### `00_is_it_a_bird_creating_a_model_from_your_own_data.ipynb` — duplicato esatto
+### `00_is_it_a_bird_creating_a_model_from_your_own_data.ipynb` — rimosso
 
-Questo file è **identico byte per byte** a `course22/00-is-it-a-bird-creating-a-model-from-your-own-data.ipynb`
-(MD5 `6cd8a93a1977ceaad3b3e698d4c7d362`, 732.679 byte).
+Questo file era **identico byte per byte** a `course22/00-is-it-a-bird-creating-a-model-from-your-own-data.ipynb`
+(MD5 `6cd8a93a1977ceaad3b3e698d4c7d362`, 732.679 byte): un duplicato esatto, senza alcuna differenza nemmeno negli output salvati.
 
-`CONFRONTO.md` punta ormai alla copia dentro `course22/`, quindi questo file non è più referenziato da nulla e può essere rimosso senza perdere niente.
+È stato rimosso e `CONFRONTO.md` punta alla copia dentro `course22/`.
 
 ---
 
