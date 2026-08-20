@@ -33,6 +33,15 @@ Copia completa del [mio fork di `course22`](https://github.com/BTConomista/cours
 | [`course22/slides/lesson1.pdf`](course22/slides/lesson1.pdf) | Le slide della lezione. |
 | [`course22/slides/birds.ipynb`](course22/slides/birds.ipynb) | Il notebook che Jeremy proietta a schermo durante la lezione (66 celle). Non è il notebook da studiare: è il supporto della spiegazione. |
 
+### Il video della lezione — `transcripts/`
+
+La lezione 1 registrata: [*Getting started*](https://youtu.be/8SF_h3xF3cE), 1h 22m 55s. È il filo che tiene insieme le tre colonne qui sopra — Jeremy costruisce il notebook del corso a schermo e intanto spiega il perché di ogni riga.
+
+| File | Cos'è |
+|---|---|
+| [`transcripts/README.md`](transcripts/README.md) | **L'indice della lezione**, minuto per minuto: dove sta il `DataBlock`, dove il transfer learning, dove il ciclo di addestramento. Serve a saltare al punto giusto senza riguardarsi un'ora e mezza. |
+| [`transcripts/fetch.py`](transcripts/fetch.py) | Genera la trascrizione integrale in locale (`transcripts/lesson-01.md`, ~12.200 parole con timestamp) partendo dai sottotitoli ufficiali del video. Il testo non è versionato: è di fast.ai, non mio. |
+
 ### Dal libro — `fastbook/`
 
 Copia completa del [mio fork di `fastbook`](https://github.com/BTConomista/fastbook), il repository ufficiale del libro *Deep Learning for Coders with fastai and PyTorch*. Del **capitolo 1** fanno parte:
@@ -65,12 +74,13 @@ Note su cosa c'era prima nella cartella `reference/` e dove è finito: [`referen
 | `runs/` | le mie esecuzioni, con gli output salvati |
 | `variants/` | varianti storiche dei miei notebook |
 | `reference/` | i documenti di confronto e analisi |
+| `transcripts/` | indice e strumento di trascrizione delle lezioni video |
 | `course22/` | copia del repository del corso fast.ai 2022 |
 | `fastbook/` | copia del repository del libro |
 
 La regola che tiene in piedi l'ordine: **il materiale ufficiale non si modifica mai**. `course22/` e `fastbook/` sono copie fedeli, e restano tali — se una cosa va cambiata, si cambia nel mio notebook e si annota la differenza nel confronto. Così `git status` su quelle due cartelle è sempre vuoto, e qualunque differenza fra il mio lavoro e l'originale è intenzionale e documentata.
 
-Per aggiungere un capitolo: una sezione in questo README con le tre colonne (mio / corso / libro) e un documento di confronto in `reference/`.
+Per aggiungere un capitolo: una sezione in questo README con le tre colonne (mio / corso / libro), l'indice della lezione video in `transcripts/` e un documento di confronto in `reference/`.
 
 ---
 
@@ -82,5 +92,7 @@ Le cartelle `course22/` e `fastbook/` **non sono opera mia**: sono copie dei rep
 
 - `fastbook/` porta la propria licenza in [`fastbook/LICENSE`](fastbook/LICENSE): il **codice** dei notebook è GPL v3, mentre la **prosa** (le celle di testo, che nel capitolo 1 sono 171 su 194) non è concessa in ridistribuzione — il repository di fastai ne consente copie o fork per uso personale. Chi legge questa copia dovrebbe fare riferimento all'[originale](https://github.com/fastai/fastbook).
 - `course22/` non contiene un file di licenza. In assenza di condizioni esplicite vale il copyright degli autori: la copia sta qui come materiale di studio, e l'[originale](https://github.com/fastai/course22) resta il riferimento.
+
+Anche il parlato delle lezioni video è di fast.ai. Per questo `transcripts/` contiene l'indice che ho scritto io e lo script che ricostruisce la trascrizione, ma non il testo integrale: quello si genera in locale e resta fuori dal repository.
 
 Il confronto in `reference/` è scritto da me e cita estratti delle fonti per commentarli.

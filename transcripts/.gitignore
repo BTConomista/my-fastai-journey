@@ -1,0 +1,5 @@
+# Le trascrizioni complete si rigenerano con fetch.py e restano locali:
+# sono il testo integrale delle lezioni di fast.ai, non materiale mio da ridistribuire.
+lesson-*.md
+*.json3
+*.vtt
