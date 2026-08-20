@@ -5,8 +5,10 @@ Questo documento confronta, cella per cella e riga per riga, i tre notebook pres
 | Nome usato qui | File | Provenienza |
 |---|---|---|
 | **Mio** | `basics-model.ipynb` | fork personale del notebook Kaggle |
-| **Originale** | `reference/00_is_it_a_bird_creating_a_model_from_your_own_data.ipynb` | notebook Kaggle di Jeremy Howard |
+| **Originale** | `reference/00_is_it_a_bird_creating_a_model_from_your_own_data.ipynb` | repo [`course22`](https://github.com/BTConomista/course22) (forkato nel profilo GitHub personale), file `00-is-it-a-bird-creating-a-model-from-your-own-data.ipynb` — notebook ufficiale del corso fast.ai 2022 di Jeremy Howard, pubblicato anche su Kaggle |
 | **Libro** | `reference/01_intro.ipynb` | capitolo 1 di *Deep Learning for Coders with fastai and PyTorch* (fastbook) |
+
+La copia in `reference/` è **identica byte per byte** all'originale in `course22` (MD5 `6cd8a93a1977ceaad3b3e698d4c7d362`, 732.679 byte).
 
 **Mio** e **Originale** sono imparentati (il primo deriva dal secondo tramite "Copy & Edit" di Kaggle), quindi vengono confrontati con dei veri *diff* riga per riga.
 Il **Libro** non deriva dallo stesso file — usa dataset, API e nomi di variabili diversi — quindi viene confrontato per **fase equivalente**, mostrando il codice completo di entrambe le parti.
@@ -834,7 +836,7 @@ Il numero di decimali non è casuale: con `.6f` il Libro può mostrare qualcosa 
 | | Mio | Originale | Libro |
 |---|---|---|---|
 | **File** | `basics-model.ipynb` | `reference/00_is_it_a_bird_creating_a_model_from_your_own_data.ipynb` | `reference/01_intro.ipynb` |
-| **Provenienza** | fork personale | notebook Kaggle di Jeremy Howard | cap. 1 di *Deep Learning for Coders* (fastbook) |
+| **Provenienza** | fork personale | repo `course22` (fork personale) — notebook ufficiale del corso fast.ai 2022 di Jeremy Howard | cap. 1 di *Deep Learning for Coders* (fastbook) |
 | Origine dei dati | ricerca web (DuckDuckGo) | ricerca web (DuckDuckGo) | dataset accademico pronto |
 | Query per categoria | 1 | 3 (photo/sun/shade) | — |
 | Pulizia necessaria | sì (`verify_images`) | sì (`verify_images`) | no |
