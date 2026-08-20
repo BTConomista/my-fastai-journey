@@ -8,7 +8,7 @@ Per la mappa completa di un capitolo vedi il [README principale](../README.md).
 
 | Lezione | Video | Durata | Trascrizione |
 |---|---|---|---|
-| 1 — *Getting started* | [`8SF_h3xF3cE`](https://youtu.be/8SF_h3xF3cE) | 1h 22m 55s | `lesson-01.md` — si genera in locale, vedi sotto |
+| 1 — *Getting started* | [`8SF_h3xF3cE`](https://youtu.be/8SF_h3xF3cE) | 1h 22m 55s | [`lesson-01-index.md`](lesson-01-index.md) — indice analitico. Il testo integrale (`lesson-01.md`) si genera in locale, vedi sotto |
 
 ---
 
@@ -42,7 +42,9 @@ da cambiare.
 ## Indice della lezione 1
 
 Ricostruito da me scorrendo la trascrizione: serve a saltare al punto giusto del video, o del file
-generato, senza doverlo leggere tutto.
+generato, senza doverlo leggere tutto. Qui sotto la versione per grandi blocchi; in
+[`lesson-01-index.md`](lesson-01-index.md) c'e' quella a grana fine, con in piu' una tabella che dice
+in quali minuti compare ciascun concetto — `DataBlock`, `fine_tune`, transfer learning e gli altri.
 
 | Minuto | Argomento |
 |---|---|

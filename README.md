@@ -39,7 +39,8 @@ La lezione 1 registrata: [*Getting started*](https://youtu.be/8SF_h3xF3cE), 1h 2
 
 | File | Cos'è |
 |---|---|
-| [`transcripts/README.md`](transcripts/README.md) | **L'indice della lezione**, minuto per minuto: dove sta il `DataBlock`, dove il transfer learning, dove il ciclo di addestramento. Serve a saltare al punto giusto senza riguardarsi un'ora e mezza. |
+| [`transcripts/lesson-01-index.md`](transcripts/lesson-01-index.md) | **L'indice della lezione**, a grana di due o tre minuti, piu' una tabella che dice in quali minuti compare ciascun concetto — `DataBlock`, `fine_tune`, transfer learning, `timm`. Serve a trovare il punto giusto senza riguardarsi un'ora e mezza. |
+| [`transcripts/README.md`](transcripts/README.md) | Come si rigenera la trascrizione, da dove viene il testo, e la nota sulla provenienza. |
 | [`transcripts/fetch.py`](transcripts/fetch.py) | Genera la trascrizione integrale in locale (`transcripts/lesson-01.md`, ~12.200 parole con timestamp) partendo dai sottotitoli ufficiali del video. Il testo non è versionato: è di fast.ai, non mio. |
 
 ### Dal libro — `fastbook/`
