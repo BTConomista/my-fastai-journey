@@ -8,24 +8,30 @@ Per la mappa completa di un capitolo vedi il [README principale](../README.md).
 
 | Lezione | Video | Durata | Trascrizione |
 |---|---|---|---|
-| 1 — *Getting started* | [`8SF_h3xF3cE`](https://youtu.be/8SF_h3xF3cE) | 1h 22m 55s | [`lesson-01-index.md`](lesson-01-index.md) — indice analitico. Il testo integrale (`lesson-01.md`) si genera in locale, vedi sotto |
+| 1 — *Getting started* | [`8SF_h3xF3cE`](https://youtu.be/8SF_h3xF3cE) | 1h 22m 55s | [`lesson01transcript_.md`](lesson01transcript_.md) (con timestamp) e [`lesson01transcript.txt`](lesson01transcript.txt) (solo testo), piu' [`lesson-01-index.md`](lesson-01-index.md) per navigarle |
 
 ---
 
-## Come si genera
+## Cosa c'è qui
 
-Il testo **non è versionato**: è la trascrizione integrale di una lezione di fast.ai, quindi
-materiale degli autori, non mio. Nel repository sta lo *strumento* per ricostruirla, non il testo.
+| File | Cos'è |
+|---|---|
+| `lesson01transcript_.md` | La trascrizione con i timestamp: 71 paragrafi da circa un minuto, ognuno aperto da `[hh:mm:ss]`, cioè il punto del video in cui comincia |
+| `lesson01transcript.txt` | Lo stesso testo di seguito, senza timestamp. Comodo per cercarci dentro o per passarlo a un altro strumento |
+| `lesson-01-index.md` | L'indice analitico: mappa della lezione e tabella concetto → minuti |
+| `fetch.py` | Lo strumento che ricostruisce una trascrizione dai sottotitoli, per le prossime lezioni |
+
+## Come si rigenera
 
 ```bash
 pip install yt-dlp
 python3 transcripts/fetch.py 8SF_h3xF3cE transcripts/lesson-01.md
 ```
 
-Il file che ne esce ha 769 blocchi di sottotitolo raggruppati in 71 paragrafi da circa un minuto,
-ognuno aperto da un timestamp `[hh:mm:ss]` che è il punto del video in cui quel paragrafo comincia.
-In tutto circa 12.200 parole. Il `.gitignore` di questa cartella tiene fuori `lesson-*.md`, quindi
-il file può stare qui senza rischio di finire in un commit.
+Lo stesso comando, cambiando l'ID del video, vale per qualunque altra lezione. Il file che ne esce
+ha 769 blocchi di sottotitolo raggruppati in 71 paragrafi, nello stesso formato di
+`lesson01transcript_.md`. I file intermedi dello scaricamento (`.json3`, `.vtt`) restano fuori dal
+repository: li tiene fuori il `.gitignore` di questa cartella.
 
 **Da dove viene il testo.** Dai sottotitoli inglesi pubblicati insieme al video, che per questa
 lezione sono *curati* e non generati automaticamente: hanno punteggiatura, maiuscole e nomi propri
@@ -78,7 +84,7 @@ in quali minuti compare ciascun concetto — `DataBlock`, `fine_tune`, transfer 
 
 ## Provenienza e licenza
 
-Il parlato delle lezioni è di **Jeremy Howard / fast.ai**, come i notebook in `course22/`:
-sta qui come materiale di studio e il [video originale](https://youtu.be/8SF_h3xF3cE) resta il
-riferimento. Per questo il repository versiona `fetch.py` e questo indice — che sono roba mia — e
-lascia fuori il testo integrale, che non lo è.
+Il parlato delle lezioni è di **Jeremy Howard / fast.ai**, come i notebook in `course22/` e la
+prosa in `fastbook/`: le trascrizioni stanno qui come materiale di studio, non sono opera mia, e il
+[video originale](https://youtu.be/8SF_h3xF3cE) resta il riferimento. Di questa cartella sono mie
+soltanto due cose: `fetch.py` e `lesson-01-index.md`.

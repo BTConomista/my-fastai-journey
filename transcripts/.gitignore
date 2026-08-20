@@ -1,6 +1,3 @@
-# Le trascrizioni integrali si rigenerano con fetch.py e restano locali: sono il testo
-# delle lezioni di fast.ai, non materiale mio da ridistribuire.
-# Il pattern e' volutamente stretto — deve prendere lesson-01.md ma non lesson-01-index.md.
-lesson-[0-9][0-9].md
+# File intermedi dello scaricamento: non servono una volta prodotta la trascrizione.
 *.json3
 *.vtt

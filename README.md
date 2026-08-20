@@ -41,7 +41,8 @@ La lezione 1 registrata: [*Getting started*](https://youtu.be/8SF_h3xF3cE), 1h 2
 |---|---|
 | [`transcripts/lesson-01-index.md`](transcripts/lesson-01-index.md) | **L'indice della lezione**, a grana di due o tre minuti, piu' una tabella che dice in quali minuti compare ciascun concetto — `DataBlock`, `fine_tune`, transfer learning, `timm`. Serve a trovare il punto giusto senza riguardarsi un'ora e mezza. |
 | [`transcripts/README.md`](transcripts/README.md) | Come si rigenera la trascrizione, da dove viene il testo, e la nota sulla provenienza. |
-| [`transcripts/fetch.py`](transcripts/fetch.py) | Genera la trascrizione integrale in locale (`transcripts/lesson-01.md`, ~12.200 parole con timestamp) partendo dai sottotitoli ufficiali del video. Il testo non è versionato: è di fast.ai, non mio. |
+| [`transcripts/lesson01transcript_.md`](transcripts/lesson01transcript_.md) | **La trascrizione integrale**, 71 paragrafi con il timestamp del punto in cui ciascuno comincia. Anche in [versione senza timestamp](transcripts/lesson01transcript.txt). Il testo è di fast.ai, non mio. |
+| [`transcripts/fetch.py`](transcripts/fetch.py) | Ricostruisce una trascrizione dai sottotitoli ufficiali del video. Cambiando l'ID vale per qualunque lezione. |
 
 ### Dal libro — `fastbook/`
 
@@ -94,6 +95,6 @@ Le cartelle `course22/` e `fastbook/` **non sono opera mia**: sono copie dei rep
 - `fastbook/` porta la propria licenza in [`fastbook/LICENSE`](fastbook/LICENSE): il **codice** dei notebook è GPL v3, mentre la **prosa** (le celle di testo, che nel capitolo 1 sono 171 su 194) non è concessa in ridistribuzione — il repository di fastai ne consente copie o fork per uso personale. Chi legge questa copia dovrebbe fare riferimento all'[originale](https://github.com/fastai/fastbook).
 - `course22/` non contiene un file di licenza. In assenza di condizioni esplicite vale il copyright degli autori: la copia sta qui come materiale di studio, e l'[originale](https://github.com/fastai/course22) resta il riferimento.
 
-Anche il parlato delle lezioni video è di fast.ai. Per questo `transcripts/` contiene l'indice che ho scritto io e lo script che ricostruisce la trascrizione, ma non il testo integrale: quello si genera in locale e resta fuori dal repository.
+Anche il parlato delle lezioni video è di fast.ai, e vale la stessa condizione di `course22/`: le trascrizioni in `transcripts/` stanno lì come materiale di studio, e i video originali restano il riferimento. Di quella cartella sono opera mia soltanto `fetch.py` e l'indice della lezione.
 
 Il confronto in `reference/` è scritto da me e cita estratti delle fonti per commentarli.
