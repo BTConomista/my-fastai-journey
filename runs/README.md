@@ -2,6 +2,8 @@
 
 Questa cartella conserva le **esecuzioni** dei notebook: copie salvate *con i risultati dentro*.
 
+Per la mappa completa di un capitolo vedi il [README principale](../README.md).
+
 I notebook nella radice del repository sono tenuti puliti (output azzerati), perché è così che il codice si legge e si confronta bene. Ma azzerare gli output significa anche buttare via la prova che il modello ha davvero funzionato: i numeri del training, le immagini scaricate, le predizioni finali. Qui quei risultati vengono conservati.
 
 | File | Origine |

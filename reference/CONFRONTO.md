@@ -1,4 +1,4 @@
-# Confronto dei tre notebook "Is it a bird?"
+# Capitolo 1 — Confronto dei tre notebook "Is it a bird?"
 
 Questo documento confronta, cella per cella e riga per riga, i tre notebook presenti nel repository:
 
@@ -8,7 +8,22 @@ Questo documento confronta, cella per cella e riga per riga, i tre notebook pres
 | **Originale** | `course22/00-is-it-a-bird-creating-a-model-from-your-own-data.ipynb` | repo [`course22`](https://github.com/BTConomista/course22) (forkato nel profilo GitHub personale) — notebook ufficiale del corso fast.ai 2022 di Jeremy Howard, pubblicato anche su Kaggle |
 | **Libro** | `fastbook/01_intro.ipynb` | repo [`fastbook`](https://github.com/BTConomista/fastbook) (forkato nel profilo GitHub personale) — capitolo 1 di *Deep Learning for Coders with fastai and PyTorch* |
 
-Entrambi i file di riferimento sono presenti nel repository come copie complete dei rispettivi repo forkati (cartelle `course22/` e `fastbook/`). Vedi `reference/README.md` per la storia delle copie usate in questo confronto.
+Entrambi i file di riferimento sono presenti nel repository come copie complete dei rispettivi repo forkati (cartelle `course22/` e `fastbook/`). Vedi [`reference/README.md`](README.md) per la storia delle copie usate in questo confronto.
+
+### Gli altri file del capitolo 1
+
+Il confronto usa i tre notebook qui sopra, ma il capitolo 1 nel repository è fatto di più materiale. La mappa completa — cosa ho scritto io, cosa viene dal corso, cosa viene dal libro — sta nel [README principale](../README.md). In sintesi:
+
+| | File | |
+|---|---|---|
+| **Mio** | [`basics-model.ipynb`](../basics-model.ipynb) | la versione corrente, quella confrontata qui |
+| | [`runs/basics-model-eseguito.ipynb`](../runs/basics-model-eseguito.ipynb) | la stessa, eseguita, con i risultati del training |
+| | [`variants/basics1.ipynb`](../variants/basics1.ipynb) | primo tentativo parziale |
+| **Corso** | [`course22/00-is-it-a-bird-…ipynb`](../course22/00-is-it-a-bird-creating-a-model-from-your-own-data.ipynb) | l'"Originale" di questo documento |
+| | [`course22/clean/00-…ipynb`](../course22/clean/00-is-it-a-bird-creating-a-model-from-your-own-data.ipynb) | versione senza prosa né output |
+| | [`course22/slides/lesson1.pdf`](../course22/slides/lesson1.pdf) | le slide della lezione |
+| **Libro** | [`fastbook/01_intro.ipynb`](../fastbook/01_intro.ipynb) | il "Libro" di questo documento |
+| | [`fastbook/clean/01_intro.ipynb`](../fastbook/clean/01_intro.ipynb) | stesse 22 celle di codice, senza la prosa del capitolo |
 
 **Mio** e **Originale** sono imparentati (il primo deriva dal secondo tramite "Copy & Edit" di Kaggle), quindi vengono confrontati con dei veri *diff* riga per riga.
 Il **Libro** non deriva dallo stesso file — usa dataset, API e nomi di variabili diversi — quindi viene confrontato per **fase equivalente**, mostrando il codice completo di entrambe le parti.

@@ -2,6 +2,8 @@
 
 Varianti storiche dei miei notebook: file che non sono né la versione corrente né una sua esecuzione, ma **passaggi intermedi del percorso** che vale la pena non perdere.
 
+Per la mappa completa di un capitolo vedi il [README principale](../README.md).
+
 | File | Cos'è |
 |---|---|
 | `basics1.ipynb` | primo tentativo parziale, si ferma al download della prima immagine |

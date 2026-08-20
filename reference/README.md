@@ -2,6 +2,8 @@
 
 Questa cartella contiene il **materiale di analisi** su cui si basa il confronto tra il mio notebook e i notebook ufficiali di fast.ai.
 
+Per la mappa completa di un capitolo — quali file ho scritto io, quali vengono dal corso, quali dal libro — vedi il [README principale](../README.md).
+
 I notebook di riferimento veri e propri **non stanno più qui**: sono nelle copie complete dei repo forkati, presenti nella radice del repository.
 
 | Cosa | Dove sta ora |
