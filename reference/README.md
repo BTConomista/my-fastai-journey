@@ -9,6 +9,8 @@ I notebook di riferimento veri e propri **non stanno più qui**: sono nelle copi
 | Notebook del corso fast.ai 2022 | `course22/` — copia completa del [fork di `course22`](https://github.com/BTConomista/course22) |
 | Capitoli del libro *Deep Learning for Coders* | `fastbook/` — copia completa del [fork di `fastbook`](https://github.com/BTConomista/fastbook) |
 | Confronto dettagliato cella per cella | `reference/CONFRONTO.md` |
+| Esecuzioni con output salvati | `runs/` — vedi `runs/README.md` |
+| Varianti storiche dei miei notebook | `variants/` — vedi `variants/README.md` |
 
 ---
 
@@ -40,6 +42,20 @@ Questo file era **identico byte per byte** a `course22/00-is-it-a-bird-creating-
 (MD5 `6cd8a93a1977ceaad3b3e698d4c7d362`, 732.679 byte): un duplicato esatto, senza alcuna differenza nemmeno negli output salvati.
 
 È stato rimosso e `CONFRONTO.md` punta alla copia dentro `course22/`.
+
+---
+
+## La cartella `is-it-a-bird/` recuperata
+
+Prima ancora di `reference/`, il repository aveva una cartella `is-it-a-bird/` con tre notebook, creata nel commit `e043be7` e cancellata per intero nel commit `4d6b757`. Non erano doppioni: ripescandoli dalla storia di git è emerso che due dei tre contenevano materiale che non esisteva da nessun'altra parte.
+
+| File cancellato | Verdetto | Destinazione |
+|---|---|---|
+| `basicsmodel.ipynb` | stesse celle di `basics-model.ipynb`, ma **con gli output** dell'esecuzione (991 KB) | `runs/basics-model-eseguito.ipynb` |
+| `forkofbasicsmodel.ipynb` | 16 celle su 19 identiche, **3 migliorie** assenti dal notebook principale | assorbito in `basics-model.ipynb` |
+| `basics1.ipynb` | snapshot parziale precedente, 10 celle su 19 | `variants/basics1.ipynb` |
+
+Le tre migliorie assorbite sono `safesearch="moderate"` nella ricerca immagini, la guardia `if urls:` contro l'`IndexError`, e `timeout=25` nel download — tutte documentate nelle rispettive celle di `CONFRONTO.md`.
 
 ---
 

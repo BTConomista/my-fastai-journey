@@ -174,7 +174,7 @@ from ddgs import DDGS
 
 def search_images_ddg(keywords, max_images=200):
     with DDGS() as ddg:
-        return L(ddg.images(keywords, max_results=max_images)).itemgot('image')
+        return L(ddg.images(keywords, max_results=max_images, safesearch="moderate")).itemgot('image')
 
 # alias breve, come spesso nei notebook fastai
 search_images = search_images_ddg
@@ -189,7 +189,7 @@ search_images = search_images_ddg
 -def search_images(keywords, max_images=200): return L(DDGS().images(keywords, max_results=max_images)).itemgot('image')
 +def search_images_ddg(keywords, max_images=200):
 +    with DDGS() as ddg:
-+        return L(ddg.images(keywords, max_results=max_images)).itemgot('image')
++        return L(ddg.images(keywords, max_results=max_images, safesearch="moderate")).itemgot('image')
 +
 +search_images = search_images_ddg
 ```
@@ -201,6 +201,7 @@ search_images = search_images_ddg
 - `.images(keywords, max_results=max_images)` — restituisce una **lista di dizionari**, uno per immagine, con chiavi come `image` (URL diretto del file), `thumbnail`, `title`, `url` (pagina sorgente), `height`, `width`, `source`.
 - `L(...)` — è la lista potenziata di **fastcore**. Si comporta come una `list` normale ma aggiunge metodi in stile funzionale e un `repr` più compatto (mostra il conteggio e i primi elementi invece di stampare migliaia di righe: in un notebook è una comodità enorme).
 - `.itemgot('image')` — metodo di `L`: applica `d['image']` a ogni elemento. È l'equivalente conciso di `[d['image'] for d in risultati]`. Quindi il valore di ritorno finale è una lista di **soli URL**, tutto il resto dei metadati viene scartato.
+- `safesearch="moderate"` (solo Mio) — filtra i risultati espliciti. Non è un dettaglio cosmetico: `search_images` viene chiamata nella cella 8 con termini generici (`'bird photo'`, `'forest photo'`) e i 400 risultati finiscono **direttamente** nel dataset di training, senza che nessuno li guardi uno per uno. Il valore `"moderate"` è il default di DuckDuckGo; esplicitarlo serve a non dipendere da un default che la libreria potrebbe cambiare. Gli altri valori sono `"off"` e `"strict"`.
 - `with DDGS() as ddg:` (solo Mio) — **context manager**: garantisce che la sessione HTTP sottostante (connection pool, cookie, token di sessione) venga chiusa in modo pulito anche se il codice interno solleva un'eccezione. Il pacchetto vecchio tollerava l'uso "al volo" affidandosi al garbage collector; il nuovo `ddgs` è più rigoroso, e usare `with` è la pratica raccomandata.
 - `search_images = search_images_ddg` — non è una copia della funzione, è un **secondo nome che punta allo stesso oggetto funzione** (in Python le funzioni sono oggetti di prima classe). Serve a non dover riscrivere tutte le chiamate successive nel notebook, che usano il nome breve ereditato dall'Originale.
 
@@ -227,20 +228,29 @@ urls[0]
 #NB: `search_images` depends on duckduckgo.com, which doesn't always return correct responses.
 #    If you get a JSON error, just try running it again (it may take a couple of tries).
 urls = search_images('bird photos', max_images=1)
-urls[0]
+if urls:
+    print(urls[0])
+else:
+    print("Nessun risultato")
 ```
 
 ```diff
 +#NB: `search_images` depends on duckduckgo.com, which doesn't always return correct responses.
 +#    If you get a JSON error, just try running it again (it may take a couple of tries).
  urls = search_images('bird photos', max_images=1)
- urls[0]
+-urls[0]
++if urls:
++    print(urls[0])
++else:
++    print("Nessun risultato")
 ```
 
 ### Spiegazione tecnica, riga per riga
 
 - `search_images('bird photos', max_images=1)` — qui `max_images=1` è passato **esplicitamente**, sovrascrivendo il default di 200. È un test di fumo: verificare che la catena "libreria installata → connessione → parsing risposta" funzioni, prima di lanciare il download pesante. Chiedere 1 sola immagine rende il test istantaneo e non consuma quota di rate-limit.
-- `urls[0]` — ultima espressione della cella. Jupyter cattura automaticamente il valore dell'ultima espressione e lo stampa come output (`Out[n]:`), senza bisogno di `print()`. È un comportamento del kernel IPython, non di Python: in uno script normale questa riga non stamperebbe nulla.
+- `urls[0]` (Originale) — ultima espressione della cella. Jupyter cattura automaticamente il valore dell'ultima espressione e lo stampa come output (`Out[n]:`), senza bisogno di `print()`. È un comportamento del kernel IPython, non di Python: in uno script normale questa riga non stamperebbe nulla.
+- `if urls: … else: …` (solo Mio) — la guardia. Se la ricerca non restituisce nulla, `urls` è una lista vuota e `urls[0]` solleverebbe `IndexError`, interrompendo il notebook con un traceback che sembra un bug del codice mentre è solo DuckDuckGo che non ha risposto. Col controllo, il caso vuoto diventa un messaggio leggibile. Nota che la lista vuota è **falsy** in Python: `if urls:` è la forma idiomatica, equivalente ma preferita a `if len(urls) > 0:`.
+- `print(urls[0])` (solo Mio) — dentro un `if` la riga non è più l'ultima espressione della cella, quindi il meccanismo automatico di Jupyter non scatta e il `print()` esplicito diventa necessario. L'output perde la formattazione `Out[n]:` ed è testo semplice: è il prezzo della guardia.
 - Il commento aggiunto — segnala che lo scraping non ufficiale può restituire errori JSON intermittenti (il sito cambia struttura, o applica rate-limit). È presente nel notebook pubblico originale di Jeremy Howard: la sua assenza nella copia "Originale" di questo repo suggerisce che quella copia sia stata leggermente potata.
 
 ### In parole semplici
@@ -249,13 +259,15 @@ urls[0]
 
 ### Extra
 
-`urls[0]` fallirebbe con `IndexError` se la ricerca non restituisse nulla. In una delle varianti del notebook (`forkofbasicsmodel.ipynb`) esisteva proprio la correzione a questo problema (`if urls: … else: print("Nessun risultato")`) — una migliora che non è mai arrivata in `basics-model.ipynb`.
+Questa guardia è arrivata per una via traversa. Non era nel notebook principale: stava in una variante separata (`forkofbasicsmodel.ipynb`), caricata e poi cancellata insieme al resto della cartella `is-it-a-bird/`. È stata recuperata dalla storia di git e portata qui — vedi `variants/README.md` per la ricostruzione completa.
+
+Resta però una copertura **parziale**, ed è onesto dirlo: il messaggio "Nessun risultato" evita l'`IndexError` in *questa* cella, ma la cella successiva usa di nuovo `urls[0]` senza controlli. Se la ricerca fallisce, il notebook non si ferma qui — si ferma una cella più avanti, con l'errore originale. Per chiuderla del tutto servirebbe un `raise` invece del `print`, oppure un `assert urls, "ricerca fallita"`.
 
 ---
 
-## Cella 6 — Download `bird.jpg` + miniatura · **identica in entrambi**
+## Cella 6 — Download `bird.jpg` + miniatura
 
-**Originale e Mio (byte per byte uguali)**
+**Originale**
 ```python
 from fastdownload import download_url
 dest = 'bird.jpg'
@@ -266,18 +278,38 @@ im = Image.open(dest)
 im.to_thumb(256,256)
 ```
 
+**Mio**
+```python
+from fastdownload import download_url
+dest = 'bird.jpg'
+download_url(urls[0], dest, show_progress=False, timeout=25)
+
+from fastai.vision.all import *
+im = Image.open(dest)
+im.to_thumb(256,256)
+```
+
+```diff
+ dest = 'bird.jpg'
+-download_url(urls[0], dest, show_progress=False)
++download_url(urls[0], dest, show_progress=False, timeout=25)
+```
+
 ### Spiegazione tecnica, riga per riga
 
 - `from fastdownload import download_url` — `fastdownload` è una piccola libreria dell'ecosistema fastai che avvolge il download HTTP aggiungendo retry automatici, gestione dei redirect e barra di avanzamento opzionale.
 - `dest = 'bird.jpg'` — percorso relativo: il file finisce nella working directory del kernel.
-- `download_url(urls[0], dest, show_progress=False)` — scarica il primo (e unico) URL trovato. `show_progress=False` disattiva la barra: in esecuzione automatica sarebbe solo rumore nell'output.
+- `download_url(urls[0], dest, show_progress=False, timeout=25)` — scarica il primo (e unico) URL trovato. `show_progress=False` disattiva la barra: in esecuzione automatica sarebbe solo rumore nell'output.
+- `timeout=25` (solo Mio) — tetto in secondi all'attesa di risposta. Gli URL arrivano da un motore di ricerca, quindi puntano a server qualsiasi su internet: se uno accetta la connessione ma poi non risponde mai, senza timeout il notebook resta appeso a tempo indeterminato — e su Kaggle una cella bloccata consuma la quota GPU senza fare nulla. Con il timeout l'attesa fallisce dopo 25 secondi con un'eccezione, che è un esito molto più gestibile di un blocco silenzioso.
 - `from fastai.vision.all import *` — **questo è l'import più importante di tutto il notebook.** Con una riga porta nel namespace praticamente tutto: `Image` (il modulo PIL ripubblicato), `Path`, `DataBlock`, `ImageBlock`, `CategoryBlock`, `RandomSplitter`, `parent_label`, `Resize`, `download_images`, `resize_images`, `verify_images`, `get_image_files`, `vision_learner`, `resnet18`, `error_rate`, `PILImage`… Tutto il codice dalle celle successive dipende da questa riga: se salti questa cella, **niente funziona più**.
 - `Image.open(dest)` — apre il file con Pillow.
 - `im.to_thumb(256,256)` — `to_thumb` **non è un metodo di Pillow**: è un metodo che fastai aggiunge dinamicamente (monkey-patching) alla classe `PIL.Image.Image`. Genera una miniatura che **preserva le proporzioni originali** entro un riquadro 256×256. Essendo l'ultima espressione, Jupyter la renderizza come immagine inline.
 
-### Perché è identica nei due file
+### Perché differisce di così poco
 
-Perché è codice puramente meccanico e già corretto: scarica un file, aprilo, mostralo. Non c'è nessuna scelta di modellazione, nessuna API deprecata, nessun parametro da tarare. Chi ha creato il fork ha modificato solo ciò che era rotto (il pacchetto DDG), obsoleto (`!pip`) o soggetto a preferenza (quante immagini scaricare) — e questa cella non rientra in nessuna delle tre categorie. È un buon indicatore di quanto il fork sia stato "chirurgico".
+Perché il resto della cella è codice puramente meccanico e già corretto: scarica un file, aprilo, mostralo. Non c'è nessuna scelta di modellazione, nessuna API deprecata, nessun parametro da tarare — e infatti sei righe su sette sono rimaste intatte. L'unica aggiunta, `timeout=25`, non cambia cosa fa la cella: cambia solo come si comporta quando la rete non collabora. È lo stesso criterio che si vede in tutto il notebook: si tocca ciò che è rotto, obsoleto o fragile, e non si tocca nient'altro.
+
+Vale la pena notare che questa riga era **identica** all'Originale fino a poco fa: il `timeout` è una delle tre migliorie recuperate dalla variante `forkofbasicsmodel.ipynb` (le altre due sono nelle celle 4 e 5). Tutte e tre appartengono alla stessa categoria — robustezza di rete — il che suggerisce che quella variante nacque dopo una sessione andata storta per colpa della connessione.
 
 ### In parole semplici
 
@@ -850,3 +882,5 @@ Il numero di decimali non è casuale: con `.6f` il Libro può mostrare qualcosa 
 | Celle di markdown | 6 | 19 | 171 |
 
 **Pattern emerso dal confronto Mio ↔ Originale:** tutte le modifiche del fork si concentrano nella **prima metà** del notebook — pacchetti rinominati, `!pip`→`%pip`, pin di numpy, meno immagini scaricate. La **seconda metà** (pulizia, DataBlock, training, predizione) è rimasta praticamente intatta, con l'unica eccezione del `bs=32`. In altre parole: è stata aggiornata l'infrastruttura, non è stata toccata la sostanza di machine learning.
+
+Le tre migliorie recuperate dalla variante `forkofbasicsmodel.ipynb` (celle 4, 5 e 6: `safesearch`, guardia su `urls`, `timeout`) **confermano il pattern invece di smentirlo** — cadono tutte nella prima metà, e tutte riguardano la stessa cosa: rendere affidabile il pezzo che dipende dalla rete. Restano quindi **due** celle identiche all'Originale, la 9 (pulizia del dataset) e la 12 (predizione finale), entrambe nella seconda metà.
